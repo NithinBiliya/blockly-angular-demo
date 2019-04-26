@@ -1,0 +1,24 @@
+<div class="container" fxLayout="column">
+  <!-- toolbar -->
+  <mat-toolbar
+    class="mat-elevation-z4"
+    color="primary"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+  >
+    <span fxFlex>{{ title }} - {{ programName }}</span>
+    <div fxFlex fxLayout="row" fxLayoutAlign="end start">
+      <button mat-flat-button (click)="saveProgram()">
+        Save
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <!-- main content -->
+  <div>
+    <p>Program in XML format -</p>
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="program.xmlData"></textarea>
+    </mat-form-field>
+  </div>
+</div>

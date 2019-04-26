@@ -1,0 +1,89 @@
+<div class="basic-container">
+  <mat-card>
+    <!-- header of the program list section -->
+    <div fxLayout="row">
+      <h2 fxFlex="40%">{{ pageTitle }}</h2>
+      <div fxFlex="60%" fxLayout="row">
+        <div fxFlex="90%" fxLayoutAlign="end center" fxLayoutGap="8px">
+          <button mat-flat-button color="primary" (click)="createNewProgram()">
+            Create Program
+          </button>
+        </div>
+        <div fxFlex="10%"></div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <!-- body of the program list section -->
+      <div>
+        <mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="programName">
+            <th
+              fxFlex="50%"
+              fxLayoutAlign="start center"
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              Program Name
+            </th>
+            <td
+              fxFlex="50%"
+              fxLayoutAlign="start center"
+              mat-cell
+              *matCellDef="let row"
+            >
+              <span class="table-cell" [title]="row.programName">
+                {{ row.name }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th
+              fxFlex="50%"
+              fxLayoutAlign="start center"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              Actions
+            </th>
+            <td
+              fxFlex="50%"
+              fxLayoutAlign="start center"
+              mat-cell
+              *matCellDef="let row"
+            >
+              <!-- <button mat-icon-button (click)="showAttributeDetailsPopup(row)">
+                <mat-icon>visibility</mat-icon>
+              </button> -->
+              <button mat-icon-button (click)="editProgram(row)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <!-- <button
+                mat-icon-button
+                (click)="showAttributeDeletePopup(row)"
+                [disabled]="row.isAvailable === 2"
+              >
+                <mat-icon>delete</mat-icon>
+              </button> -->
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </mat-table>
+
+        <mat-paginator
+          [pageSizeOptions]="pageSizeOptions"
+          [pageSize]="pageSize"
+        ></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<!--
+  <div>
+    <p>dataSource.data - {{ dataSource?.data | json }}</p>
+  </div>
+-->
