@@ -1,0 +1,18 @@
+.basic-container {
+  padding: 2%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

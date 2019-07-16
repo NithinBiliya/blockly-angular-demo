@@ -1,0 +1,12 @@
+<div mat-dialog-content>
+  <p>Program name -</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.programName" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.programName" cdkFocusInitial>
+    Create
+  </button>
+</div>
