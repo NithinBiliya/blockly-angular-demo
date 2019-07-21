@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProgramService } from '../services/program.service';
 import { IProgram } from '../models/program';
 
+declare var Blockly: any;
+
 @Component({
   selector: 'app-program-create',
   templateUrl: './program-create.component.html',
@@ -12,6 +14,7 @@ export class ProgramCreateComponent implements OnInit {
   title: string;
   programName: string;
   program: IProgram;
+  workspace: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,11 +38,25 @@ export class ProgramCreateComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.workspace = Blockly.inject('blocklyDiv', {
+      toolbox: document.getElementById('toolbox'),
+      scrollbars: false
+    });
+
+    if (this.program.xmlData) {
+      this.workspace.clear();
+      Blockly.Xml.domToWorkspace(
+        Blockly.Xml.textToDom(this.program.xmlData),
+        this.workspace
+      );
+    }
+  }
 
   saveProgram(): void {
-    // TODO - get XML representation of the program
-
+    this.program.xmlData = Blockly.Xml.domToText(
+      Blockly.Xml.workspaceToDom(this.workspace)
+    );
     console.log('saving the program - ', JSON.stringify(this.program));
     this.programService.upsertOne(this.program);
     this.router.navigate(['listProgram']);
