@@ -9,7 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ProgramNameDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ProgramNameDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit() {}
